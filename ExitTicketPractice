@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probability Exit Ticket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .question p {
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+        }
+        .correct {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Exit Ticket: Introduction to Probability 🎲</h1>
+
+        <div class="question" id="q1">
+            <p>1a. [cite_start]Rasheed's sock drawer contains 6 pairs of socks: red, brown, green, white, black, and blue[cite: 13]. List the sample space for the experiment of choosing one pair of socks.</p>
+            <p>List the colors separated by commas (e.g., color1, color2, ...):</p>
+            <input type="text" id="q1-input">
+            <div class="feedback" id="q1-feedback"></div>
+        </div>
+
+        <div class="question" id="q2">
+            <p>1c. [cite_start]Calculate P(blue)[cite: 18]. Express your answer as a fraction (e.g., 1/2).</p>
+            <input type="text" id="q2-input">
+            <div class="feedback" id="q2-feedback"></div>
+        </div>
+
+        <div class="question" id="q3">
+            <p>1e. [cite_start]Calculate P(not red)[cite: 20]. Express your answer as a fraction (e.g., 5/6).</p>
+            <input type="text" id="q3-input">
+            <div class="feedback" id="q3-feedback"></div>
+        </div>
+
+        <div class="question" id="q4">
+            <p>2b. [cite_start]Tuesday follows Monday in the week[cite: 31]. Determine if this event is: **certain to occur**, **just as likely to occur as not to occur**, or **impossible to occur**.</p>
+            <select id="q4-select">
+                <option value="">-- Select an option --</option>
+                <option value="certain">certain to occur</option>
+                <option value="just as likely">just as likely to occur as not to occur</option>
+                <option value="impossible">impossible to occur</option>
+            </select>
+            <div class="feedback" id="q4-feedback"></div>
+        </div>
+
+        <div class="question" id="q5">
+            <p>2c. [cite_start]You have only white shirts in your closet[cite: 32]. What is the probability of reaching into your closet and choosing a red shirt? Express the probability as a percent (e.g., 0%).</p>
+            <input type="text" id="q5-input">
+            <div class="feedback" id="q5-feedback"></div>
+        </div>
+        
+        <button onclick="checkAnswers()">Submit & Check Answers</button>
+
+    </div>
+
+    <script>
+        function checkAnswers() {
+            // Helper function to format input for comparison (e.g., remove spaces)
+            const formatInput = (input) => input.toLowerCase().replace(/\s/g, '');
+
+            // --- Question 1 Check (Sample Space) ---
+            const q1Input = document.getElementById('q1-input').value;
+            const q1Feedback = document.getElementById('q1-feedback');
+            // The correct sample space colors: red, brown, green, white, black, blue
+            // We'll check if the input contains all 6 colors regardless of order/formatting
+            const correctColors = ['red', 'brown', 'green', 'white', 'black', 'blue'];
+            const inputColors = q1Input.split(',').map(c => formatInput(c));
+            
+            let q1Correct = true;
+            if (inputColors.length !== 6) {
+                q1Correct = false;
+            } else {
+                for (let color of correctColors) {
+                    if (!inputColors.includes(color)) {
+                        q1Correct = false;
+                        break;
+                    }
+                }
+            }
+            
+            if (q1Correct) {
+                q1Feedback.textContent = "✅ Correct! The sample space lists all 6 possible colors.";
+                q1Feedback.className = "feedback correct";
+            } else {
+                q1Feedback.textContent = "❌ Incorrect. Remember to list all 6 colors: red, brown, green, white, black, blue.";
+                q1Feedback.className = "feedback incorrect";
+            }
+            q1Feedback.style.display = "block";
+
+            // --- Question 2 Check (P(blue)) ---
+            const q2Input = formatInput(document.getElementById('q2-input').value);
+            const q2Feedback = document.getElementById('q2-feedback');
+            const q2Answer = '1/6';
+            if (q2Input === q2Answer) {
+                q2Feedback.textContent = "✅ Correct! There is 1 blue pair out of 6 total pairs, so P(blue) = 1/6.";
+                q2Feedback.className = "feedback correct";
+            } else {
+                q2Feedback.textContent = "❌ Incorrect. P(blue) is 1/6.";
+                q2Feedback.className = "feedback incorrect";
+            }
+            q2Feedback.style.display = "block";
+
+            // --- Question 3 Check (P(not red)) ---
+            const q3Input = formatInput(document.getElementById('q3-input').value);
+            const q3Feedback = document.getElementById('q3-feedback');
+            const q3Answer = '5/6';
+            if (q3Input === q3Answer) {
+                q3Feedback.textContent = "✅ Correct! P(not red) = 1 - P(red) = 1 - 1/6 = 5/6. (The 5 other colors are not red).";
+                q3Feedback.className = "feedback correct";
+            } else {
+                q3Feedback.textContent = "❌ Incorrect. P(not red) is 5/6.";
+                q3Feedback.className = "feedback incorrect";
+            }
+            q3Feedback.style.display = "block";
+
+            // --- Question 4 Check (Certainty) ---
+            const q4Input = document.getElementById('q4-select').value;
+            const q4Feedback = document.getElementById('q4-feedback');
+            const q4Answer = 'certain';
+            if (q4Input === q4Answer) {
+                q4Feedback.textContent = "✅ Correct! Tuesday is guaranteed to follow Monday, so it is certain to occur.";
+                q4Feedback.className = "feedback correct";
+            } else {
+                q4Feedback.textContent = "❌ Incorrect. This event is certain to occur.";
+                q4Feedback.className = "feedback incorrect";
+            }
+            q4Feedback.style.display = "block";
+
+            // --- Question 5 Check (Impossible) ---
+            const q5Input = formatInput(document.getElementById('q5-input').value).replace('%', '');
+            const q5Feedback = document.getElementById('q5-feedback');
+            const q5Answer = '0';
+            if (q5Input === q5Answer) {
+                q5Feedback.textContent = "✅ Correct! Since you only have white shirts, choosing a red shirt is impossible, so the probability is 0%.";
+                q5Feedback.className = "feedback correct";
+            } else {
+                q5Feedback.textContent = "❌ Incorrect. The probability is 0%.";
+                q5Feedback.className = "feedback incorrect";
+            }
+            q5Feedback.style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
